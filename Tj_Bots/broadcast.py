@@ -9,9 +9,9 @@ async def broadcast_users(client, message):
     is_forward = False
     if len(message.command) > 1 and message.command[1] == "-f":
         is_forward = True
-        msg_text = "🚀 מתחיל שידור (Forward)..."
+        msg_text = "🚀 Starting transmission (Forward)..."
     else:
-        msg_text = "🚀 מתחיל שידור (Copy)..."
+        msg_text = "🚀 Broadcasting begins (Copy)..."
 
     msg = await message.reply(msg_text, quote=True)
     users = await db.get_all_users()
@@ -33,15 +33,15 @@ async def broadcast_users(client, message):
             
         if time.time() - last_update_time >= 5:
             try:
-                await msg.edit(f"⏳ שידור למשתמשים...\n✅ נשלח: {count}\n🚫 נכשל: {blocked}")
+                await msg.edit(f"⏳ Broadcasting to users...\n✅ Sent: {count}\n🚫 Failed: {blocked}")
                 last_update_time = time.time()
             except: pass
             
-    await msg.edit(f"✅ **שידור למשתמשים הסתיים.**\n\n📫 נשלח ל: {count}\n🚫 נכשל/נחסם: {blocked}")
+    await msg.edit(f"✅ **Broadcast to users completed.**\n\n📫 Sent to: {count}\n🚫 Failed/Blocked: {blocked}")
 
 @Client.on_message(filters.command("broadcast_groups") & filters.user(ADMINS) & filters.reply)
 async def broadcast_groups(client, message):
-    msg = await message.reply("🚀 מתחיל שידור לקבוצות...", quote=True)
+    msg = await message.reply("🚀 Group broadcast starting...", quote=True)
     groups = await db.get_all_groups()
     
     count = 0
@@ -58,8 +58,8 @@ async def broadcast_groups(client, message):
             
         if time.time() - last_update_time >= 5:
             try:
-                await msg.edit(f"⏳ שידור לקבוצות...\n✅ נשלח: {count}\n🚫 נכשל: {failed}")
+                await msg.edit(f"⏳ Group broadcast...\n✅ Sent: {count}\n🚫 Failed: {failed}")
                 last_update_time = time.time()
             except: pass
             
-    await msg.edit(f"✅ **שידור לקבוצות הסתיים.**\n\n📫 נשלח ל: {count}\n🚫 נכשל: {failed}")
+    await msg.edit(f"✅ **Group broadcast completed.**\n\n📫 Sent to: {count}\n🚫 Failed: {failed}")
