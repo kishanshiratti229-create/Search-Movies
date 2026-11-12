@@ -120,8 +120,8 @@ async def send_home_message(client, message, user=None, is_edit=False):
         [InlineKeyboardButton("🔍 Inline Search 🔎", switch_inline_query_current_chat="", style=enums.ButtonStyle.PRIMARY)],
         [InlineKeyboardButton('✇ Request Group ✇', url=REQUEST_GROUP, style=enums.ButtonStyle.SUCCESS),
          InlineKeyboardButton('✇ Update Channel ✇', url=f'https://t.me/{UPDATE_CHANNEL}', style=enums.ButtonStyle.SUCCESS)],
-        [InlineKeyboardButton('〄 עזרה 〄', callback_data='help', style=enums.ButtonStyle.PRIMARY), 
-         InlineKeyboardButton('⍟ אודות ⍟', callback_data='about', style=enums.ButtonStyle.PRIMARY)],
+        [InlineKeyboardButton('〄 Help 〄', callback_data='help', style=enums.ButtonStyle.PRIMARY), 
+         InlineKeyboardButton('⍟ About ⍟', callback_data='about', style=enums.ButtonStyle.PRIMARY)],
         [InlineKeyboardButton('⇋ Add to group ⇋', url=f"http://t.me/{client.me.username}?startgroup&admin=delete_messages", style=enums.ButtonStyle.SUCCESS)]
     ]
     
@@ -130,7 +130,7 @@ async def send_home_message(client, message, user=None, is_edit=False):
            "**I am an innovative movie and series search engine,**"
            "\n<b>My job is to look for movies in groups,"
            "\nAdd me to your group and I'll continue from here.</b><tg-emoji emoji-id='5224607267797606837'>☄️</tg-emoji>\n\n"
-           "<blockquote>**👨🏼‍💻Lead Programmer: @BOSS1480**</blockquote>")
+           "<blockquote>**👨🏼‍💻Lead Programmer: @KishanMS**</blockquote>")
     
     if is_edit:
         await message.edit_media(InputMediaPhoto(PHOTO_URL, caption=txt), reply_markup=InlineKeyboardMarkup(buttons))
@@ -193,7 +193,7 @@ async def callback_handler(client, query: CallbackQuery):
             [InlineKeyboardButton('Extra', callback_data='help_extra', style=enums.ButtonStyle.PRIMARY), InlineKeyboardButton('User Guide', callback_data='help_guide', style=enums.ButtonStyle.PRIMARY)],
             [InlineKeyboardButton('Download from TikTok', callback_data='help_d', style=enums.ButtonStyle.PRIMARY), InlineKeyboardButton('Statistics', callback_data='help_stats', style=enums.ButtonStyle.PRIMARY)],
             [InlineKeyboardButton('🆕 Upload Image', callback_data='help_telegraph', style=enums.ButtonStyle.PRIMARY), InlineKeyboardButton('🆕 Video Tools', callback_data='help_exthumb', style=enums.ButtonStyle.PRIMARY)],
-            [InlineKeyboardButton('🏠 בית 🏠', callback_data='home', style=enums.ButtonStyle.DANGER)],          
+            [InlineKeyboardButton('🏠 Home 🏠', callback_data='home', style=enums.ButtonStyle.DANGER)],          
         ]
         
         if user_id in ADMINS:
@@ -344,17 +344,17 @@ async def callback_handler(client, query: CallbackQuery):
             "<blockquote><b>╔════❰ 𝗔𝗯𝗼𝘂𝘁 𝗧𝗵𝗲 𝗕𝗼𝘁 ❱═❍⊱❁۪۪</b>\n"
             "<b>║╭━━━━━━━━━━━━━━━➣</b>\n"
             f"<b>║┣⪼ 🤖 ʙᴏᴛ : {bot_mention}</b>\n"
-            "<b>║┣⪼ 👦 ᴄʀᴇᴀᴛᴏʀ : @BOSS1480</b>\n"
+            "<b>║┣⪼ 👦 ᴄʀᴇᴀᴛᴏʀ : @Cinhun4u</b>\n"
             f"<b>║┣⪼ 🤖 ᴜᴘᴅᴀᴛᴇ : <a href='https://t.me/{UPDATE_CHANNEL}'>Update Channel</a></b>\n"
             "<b>║┣⪼ 🗣️ ʟᴀɴɢᴜᴀɢᴇ : [Python](https://www.python.org/)</b>\n"
             "<b>║┣⪼ 📚 Lɪʙʀᴀʀʏ : [Pyrogram](https://docs.pyrogram.org/)</b>\n"
-            "<b>║┣⪼ &lt;/&gt; Sᴏᴜʀᴄᴇ: : [GitHub](https://github.com/TJ-Bots/Search-Movies)</b>\n"
+            "<b>║┣⪼ &lt;/&gt; Website: : [Website](https://Cinhub4u.gt.tc/)</b>\n"
             "<b>║╰━━━━━━━━━━━━━━━➣</b>\n"
             "<b>╚══════════════════❍⊱❁۪۪</b></blockquote>"
         )
         btn = [
-            [InlineKeyboardButton('🐙 𝚜𝚘𝚞𝚛𝚌𝚎 𝚌𝚘𝚍𝚎 🐙', url='https://github.com/TJ-Bots/Search-Movies', style=enums.ButtonStyle.SUCCESS)], 
-            [InlineKeyboardButton('חזרה ⋟', callback_data='home', style=enums.ButtonStyle.PRIMARY), InlineKeyboardButton('✘ סגור', callback_data='closea', style=enums.ButtonStyle.DANGER)]
+            [InlineKeyboardButton('🐙 Website 🐙', url='https://Cinhub4u.gt.tc/', style=enums.ButtonStyle.SUCCESS)], 
+            [InlineKeyboardButton('חזרה ⋟', callback_data='home', style=enums.ButtonStyle.PRIMARY), InlineKeyboardButton('✘ ', callback_data='closea', style=enums.ButtonStyle.DANGER)]
         ]
         await query.message.edit_media(InputMediaPhoto(PHOTO_URL, caption=txt), reply_markup=InlineKeyboardMarkup(btn))
 
