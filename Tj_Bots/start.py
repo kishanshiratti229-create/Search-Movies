@@ -374,8 +374,7 @@ async def callback_handler(client, query: CallbackQuery):
 
     elif data == "help_exthumb":
         txt = (
-            "<tg-emoji emoji-id='5823268688874179761'>🔧</tg-emoji> <b><i>Video Tools:</i>\n\n\n</b><b><tg-emoji emoji-id='5332679880599418983'>ℹ️</tg-emoji></b><b> </b><b><u>Video Information:</u></b>\n<b>◉ Command:</b>\n<blockquote>/mediainfo</blockquote>\n\n<b>🖼️ </b><b><u>Extract Thumbnail:</u></b>\n<b>◉ Command:</b>\n<blockquote>/extract_thumbnail</blockquote>\n\n\n<b><u>How to use?</u></b>\n<blockquote>Comment on a video/file with the command "Who wants."
-        )
+            "<tg-emoji emoji-id='5823268688874179761'>🔧</tg-emoji> <b><i>Video Tools:</i>\n\n\n</b><b><tg-emoji emoji-id='5332679880599418983'>ℹ️</tg-emoji></b><b> </b><b><u>Video Information:</u></b>\n<b>◉ Command:</b>\n<blockquote>/mediainfo</blockquote>\n\n<b>🖼️ </b><b><u>Extract Thumbnail:</u></b>\n<b>◉ Command:</b>\n<blockquote>/extract_thumbnail</blockquote>\n\n\n<b><u>How to use?</u></b>\n<blockquote>Comment on a video/file with the command ")
         await query.message.edit_media(InputMediaPhoto(PHOTO_URL, caption=txt), reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('חזרה ⋟', callback_data='help', style=enums.ButtonStyle.PRIMARY)]]))
 
 
