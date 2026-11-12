@@ -6,7 +6,7 @@ from .utils import is_admin
 @Client.on_message(filters.command("settings") & filters.group)
 async def settings_cmd(client, message):
     if not await is_admin(client, message.chat.id, message.from_user.id):
-        return await message.reply("⛔ פקודה זו זמינה למנהלים בלבד.", quote=True)
+        return await message.reply("⛔ This command is available to administrators only.", quote=True)
     
     await send_settings_panel(message.chat.id, message)
 
@@ -17,17 +17,17 @@ async def send_settings_panel(chat_id, message, is_edit=False):
     disp_val = settings.get('display_mode', 'inline')
     trig_val = settings.get('search_trigger', 'all')
 
-    text = "<b>⚙️ הגדרות הבוט ⚙️</b>\n\nלחץ על הערך לשינוי.\n"
+    text = "<b>⚙️ Bot Settings ⚙️</b>\n\nClick on the value to change.\n"
     
     res_btn = str(res_val)
-    disp_btn = 'כפתורים' if disp_val == 'inline' else 'טקסט'
-    trig_btn = 'כל הודעה' if trig_val == 'all' else 'רק עם !'
+    disp_btn = 'buttons' if disp_val == 'inline' else 'text'
+    trig_btn = 'Every message' if trig_val == 'all' else 'Only with !'
 
     buttons = [
-        [InlineKeyboardButton(res_btn, callback_data="set_res"), InlineKeyboardButton('מספר תוצאות:', callback_data="noop")],
-        [InlineKeyboardButton(disp_btn, callback_data="set_disp"), InlineKeyboardButton('מצב תצוגה:', callback_data="noop")],
-        [InlineKeyboardButton(trig_btn, callback_data="set_trig"), InlineKeyboardButton('טריגר חיפוש:', callback_data="noop")],
-        [InlineKeyboardButton('✘ סגור תפריט ✘', callback_data="close_settings")]
+        [InlineKeyboardButton(res_btn, callback_data="set_res"), InlineKeyboardButton('Number of results:', callback_data="noop")],
+        [InlineKeyboardButton(disp_btn, callback_data="set_disp"), InlineKeyboardButton('Display mode:', callback_data="noop")],
+        [InlineKeyboardButton(trig_btn, callback_data="set_trig"), InlineKeyboardButton('Search trigger:', callback_data="noop")],
+        [InlineKeyboardButton('✘ Close Menu ✘', callback_data="close_settings")]
     ]
     
     markup = InlineKeyboardMarkup(buttons)
@@ -42,7 +42,7 @@ async def settings_callback(client, query: CallbackQuery):
     chat_id = query.message.chat.id
     
     if not await is_admin(client, chat_id, query.from_user.id):
-        return await query.answer("⛔ למנהלים בלבד!", show_alert=True)
+        return await query.answer("⛔ For administrators only!", show_alert=True)
     
     data = query.data
 
@@ -70,5 +70,5 @@ async def settings_callback(client, query: CallbackQuery):
         new_val = 'bang' if curr == 'all' else 'all'
         await db.update_settings(chat_id, 'search_trigger', new_val)
         
-    await query.answer("ההגדרה עודכנה ✅")
+    await query.answer("The definition has been updated ✅")
     await send_settings_panel(chat_id, query.message, is_edit=True)
