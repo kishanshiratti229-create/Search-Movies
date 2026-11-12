@@ -26,7 +26,7 @@ async def search_handler(client, message):
     
     if not results:
         try:
-            msg = await message.reply(f"**לא נמצאו תוצאות לחיפוש: `{query}`** <tg-emoji emoji-id='5924497670721769339'>🙅‍♂️</tg-emoji>", quote=True)
+            msg = await message.reply(f"**No results found for search: `{query}`** <tg-emoji emoji-id='5924497670721769339'>🙅‍♂️</tg-emoji>", quote=True)
             await asyncio.sleep(2)
             await msg.delete()
         except:
@@ -53,7 +53,7 @@ async def search_pagination(client, query):
         results = await db.search_files(q_str)
         
         if not results:
-            return await query.answer("החיפוש פג תוקף.", show_alert=True)
+            return await query.answer("Search has expired.", show_alert=True)
             
         await send_results_page(client, query.message, results, page, q_str, settings, is_edit=True)
     except Exception as e:
@@ -69,9 +69,9 @@ async def send_results_page(client, message, results, page, query, settings, is_
     
     bot_username = client.me.username or "Bot"
 
-    text = f"<b><tg-emoji emoji-id='5319230516929502602'>🔍</tg-emoji></b> <b><i><u>תוצאות חיפוש</u></i></b> <tg-emoji emoji-id='5452069934089641166'>❓</tg-emoji>\n\n"
-    text += f"<blockquote><b><tg-emoji emoji-id='5397782960512444700'>📌</tg-emoji></b>   <b>שאילתה:</b> <code>{query}</code></blockquote>\n"
-    text += f"<blockquote><b><tg-emoji emoji-id='5282843764451195532'>🖥</tg-emoji></b>   <b>תוצאות:</b> <code>{total_results}</code></blockquote>\n"
+    text = f"<b><tg-emoji emoji-id='5319230516929502602'>🔍</tg-emoji></b> <b><i><u>Search results</u></i></b> <tg-emoji emoji-id='5452069934089641166'>❓</tg-emoji>\n\n"
+    text += f"<blockquote><b><tg-emoji emoji-id='5397782960512444700'>📌</tg-emoji></b> <b>Query:</b> <code>{query}</code></blockquote>\n"
+    text += f"<blockquote><b><tg-emoji emoji-id='5282843764451195532'>🖥</tg-emoji></b> <b>Results:</b> <code>{total_results}</code></blockquote>\n"
     text += "\n**<tg-emoji emoji-id='5406745015365943482'>⬇️</tg-emoji><tg-emoji emoji-id='5406745015365943482'>⬇️</tg-emoji><tg-emoji emoji-id='5406745015365943482'>⬇️</tg-emoji><tg-emoji emoji-id='5406745015365943482'>⬇️</tg-emoji><tg-emoji emoji-id='5406745015365943482'>⬇️</tg-emoji><tg-emoji emoji-id='5406745015365943482'>⬇️</tg-emoji><tg-emoji emoji-id='5406745015365943482'>⬇️</tg-emoji><tg-emoji emoji-id='5406745015365943482'>⬇️</tg-emoji><tg-emoji emoji-id='5406745015365943482'>⬇️</tg-emoji><tg-emoji emoji-id='5406745015365943482'>⬇️</tg-emoji>**\n\n"
     
     keyboard = []
@@ -87,7 +87,7 @@ async def send_results_page(client, message, results, page, query, settings, is_
             keyboard.append([InlineKeyboardButton(btn_text, callback_data=f"dl_{file_id}", style=enums.ButtonStyle.PRIMARY)])
             
     else:
-        chars = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י']
+        chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'T', 'Y']
         for i, res in enumerate(current_batch):
             prefix = chars[i] if i < len(chars) else str(i+1)
             clean = clean_filename(res['file_name'])
@@ -95,7 +95,7 @@ async def send_results_page(client, message, results, page, query, settings, is_
             link = f"https://t.me/{bot_username}?start={file_id}"
             text += f"🎬 **{prefix}. [{clean}]({link})**\n\n"
 
-    nav = []
+    none = []
     if page > 1: nav.append(InlineKeyboardButton('⬅️', callback_data=f"search#{query}#{page-1}", style=enums.ButtonStyle.SUCCESS))
     if page < total_pages: nav.append(InlineKeyboardButton('➡️', callback_data=f"search#{query}#{page+1}", style=enums.ButtonStyle.SUCCESS))
     if nav: keyboard.append(nav)
